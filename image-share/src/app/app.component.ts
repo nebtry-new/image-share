@@ -11,7 +11,9 @@ export class AppComponent implements OnInit {
   imageBase64: string = '';
   constructor(public jsInterface: JsInterfaceService, ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {}
+
+  async onSave(): Promise<void> {
     this.imageBase64 = await this.onExportImage('slip');
     this.jsInterface.saveImageEvent(this.imageBase64);
   }
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit {
         useCORS: true
       };
       const canvas = await html2canvas(el, options);
-      const data = canvas.toDataURL("image/jpg");
+      const data = canvas.toDataURL().replace(/data:image\/[a-zA-Z]+;base64\,/, "");
       // console.log(data);
       return data;
     } else {
