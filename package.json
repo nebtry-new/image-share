@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "build": "nx build --prod --output-path ../image-share/docs --base-href https://nebtry-new.github.io/image-share/",
+    "build": "nx build --prod --output-path docs --base-href https://nebtry-new.github.io/image-share/",
     "test": "nx test"
   },
   "private": true,
