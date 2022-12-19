@@ -5,7 +5,7 @@ export interface JavascriptCallback {
   shareImageEvent(data: any): any;
 }
 
-declare const web: JavascriptCallback;
+declare const android: JavascriptCallback;
 declare const window: any;
 declare const webkit: any;
 
@@ -21,7 +21,6 @@ export class JsInterfaceService {
     const isAndroid = ua.indexOf('android') > -1;
     try {
       if (isAndroid) {
-        let android = web;
         console.log('isAndroid');
         android.saveImageEvent(body);
       } else {
