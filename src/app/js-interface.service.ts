@@ -39,7 +39,6 @@ export class JsInterfaceService {
     const isAndroid = ua.indexOf('android') > -1;
     try {
       if (isAndroid) {
-        let android = web;
         console.log('isAndroid');
         android.shareImageEvent(body);
       } else {
