@@ -1,15 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-
-describe('AppComponent', () => {
+import { SlipComponent } from './slip.component';
+describe('SlipComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [SlipComponent],
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(SlipComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
