@@ -20,6 +20,10 @@ export class RedirectComponent implements OnInit {
       this.msg = 'redirect..';
       window.location.href =
         'https://storage.googleapis.com/paotang-static-file/DEEPLINK/paotang-external-deeplink.html?openExternalBrowser=1&destination=missionWeb&page=tracking&campaignCode=00000000-0000-0000-0000-0000000ca003';
+    } else if (window.location.pathname.includes('/testing')) {
+      this.msg = 'redirect..';
+      window.location.href =
+        'https://bitakou.github.io/test-pdf-viewer-ngx/';
     } else {
       this.msg = 'invalid url';
     }
