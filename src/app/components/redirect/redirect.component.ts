@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, OnInit } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { pluck } from 'rxjs';
 
 @Component({
   selector: 'image-share-redirect',
@@ -9,9 +11,22 @@ import { Meta } from '@angular/platform-browser';
 })
 export class RedirectComponent implements OnInit {
   public msg: string = '';
-  constructor(private meta: Meta) {}
+  constructor(
+    private meta: Meta,
+    private route: ActivatedRoute,
+    private titleSvc: Title
+  ) {}
 
   ngOnInit(): void {
+    const { data } = this.route.snapshot.data;
+    this.titleSvc.setTitle(data?.title);
+    this.meta.updateTag(
+      {
+        name: 'description',
+        content: data?.description,
+      },
+    );
+
     if (window.location.pathname.includes('/abc')) {
       this.msg = 'redirect..';
       this.meta.addTag({
@@ -31,28 +46,31 @@ export class RedirectComponent implements OnInit {
       window.location.href = 'https://bitakou.github.io/test-pdf-viewer-ngx/';
     } else if (window.location.pathname.includes('/nothing')) {
       this.msg = 'nothing here';
-      this.meta.updateTag({
-        property: 'title',
-        content: 'title: Nothing change in this page',
-      });
-      this.meta.updateTag({
-        property: 'description',
-        content: 'description: test description here!',
-      });
-      this.meta.updateTag({
-        property: 'og:title',
-        content: 'og:title Nothing change in this page',
-      });
-      this.meta.updateTag({ property: 'og:type', content: 'website' });
-      this.meta.updateTag({
-        property: 'og:url',
-        content: 'https://nebtry-new.github.io/image-share/nothing',
-      });
-      this.meta.updateTag({
-        property: 'og:image',
-        content:
-          'https://mission-static-file-sit.storage.googleapis.com/mock/campaign-spending-value.png',
-      });
+      // this.meta.addTags([
+      //   {
+      //     property: 'title',
+      //     content: 'title: Nothing change in this page',
+      //   },
+      //   {
+      //     property: 'description',
+      //     content: 'description: test description here!',
+      //   },
+      //   {
+      //     property: 'og:title',
+      //     content: 'og:title Nothing change in this page',
+      //   },
+      //   { property: 'og:type', content: 'website' },
+      //   {
+      //     property: 'og:url',
+      //     content: 'https://nebtry-new.github.io/image-share/nothing',
+      //   },
+      //   {
+      //     property: 'og:image',
+      //     content:
+      //       'https://mission-static-file-sit.storage.googleapis.com/mock/campaign-spending-value.png',
+      //   },
+      //   { name: 'robots', content: 'index,follow' },
+      // ]);
     } else {
       this.msg = 'invalid url';
     }
